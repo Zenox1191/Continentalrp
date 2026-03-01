@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: 'Oxanium', system-ui, sans-serif;
+    --font-sans: 'Outfit', sans-serif;
+
+    /* Galaxy Dark Theme Palette */
+    --background: 240 60% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 50% 6%;
+    --card-foreground: 210 40% 98%;
+    --card-border: 270 50% 20%;
+
+    --popover: 240 50% 6%;
+    --popover-foreground: 210 40% 98%;
+    --popover-border: 270 50% 20%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 80% 50%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 30% 12%;
+    --muted-foreground: 240 20% 70%;
+
+    --accent: 190 90% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 270 40% 25%;
+    --input: 240 30% 15%;
+    --ring: 270 80% 60%;
+
+    --radius: 1rem;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen overflow-x-hidden;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .glass-panel {
+    @apply bg-background/40 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)];
+  }
+
+  .glass-card {
+    @apply bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-md border border-white/10 shadow-lg transition-all duration-300;
+  }
+
+  .galaxy-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-accent via-primary to-secondary;
+  }
+
+  .glow-effect {
+    position: relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    @apply absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-30 transition-opacity duration-300;
+    z-index: -1;
+  }
+
+  .glow-effect:hover::before {
+    @apply opacity-70;
+  }
+}
+
+/* Starfield Animation */
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.3; transform: scale(0.8); }
+}
+
+@keyframes pan {
+  0% { transform: translateY(0) scale(1.5); }
+  100% { transform: translateY(-5%) scale(1.5); }
+}
+
+.animate-pan {
+  animation: pan 60s ease-in-out infinite alternate;
+}
